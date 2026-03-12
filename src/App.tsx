@@ -2,12 +2,17 @@ import { useProducts } from './hooks/useProducts';
 import { ProductCard } from './components/ProductCard';
 import { SortSelect } from './components/SortSelect';
 import { SearchInput } from './components/SearchInput';
+import { Pagination } from './components/Pagination';
+import { ProductSkeleton } from './components/ProductSkeleton';
 
 function App() {
   const { products, loading, error, searchTerm, setSearchTerm } = useProducts();
 
-  if (loading) return <div className="flex justify-center items-center h-screen text-blue-600 font-bold">Завантаження...</div>;
-
+if (loading) return (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {[...Array(12)].map((_, i) => <ProductSkeleton key={i} />)}
+  </div>
+);
   return (
     <div className="w-full min-h-screen bg-white">
       
@@ -62,6 +67,7 @@ function App() {
             </div>
           )}
         </div>
+        <Pagination />
       </div>
     </div>
   );
