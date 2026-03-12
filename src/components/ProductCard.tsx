@@ -17,7 +17,6 @@ export const ProductCard = ({ product }: Props) => {
     const isAvailable = hasVolumes ? currentVolumeData?.in_stock : product.in_stock;
 
     const { searchTerm } = useProducts();
- console.log('ProductCard render', product);
     return (
         <div className="group relative flex flex-col w-full max-w-[347px] bg-white rounded-[16px]">
             <div className="relative flex items-center justify-center w-full mb-4 overflow-hidden rounded-md aspect-square bg-gray-50">
