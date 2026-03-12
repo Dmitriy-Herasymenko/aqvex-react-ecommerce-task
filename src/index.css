@@ -1,15 +1,27 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'AqvexFont';
+  src: url('./assets/fonts/Klein/Klein-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'AqvexCustom';
+  src: url('./assets/fonts/Klein/Klein-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'AqvexCustom', sans-serif;
+  
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: #000;
-  background-color: #fff;
-
-  font-synthesis: none;
+  
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

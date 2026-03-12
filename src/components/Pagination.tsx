@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useProducts } from '../hooks/useProducts';
+import { CaretLeft, CaretRight } from './Icons';
 
 export const Pagination = () => {
   const { currentPage, setCurrentPage, totalPages } = useProducts();
@@ -20,10 +21,10 @@ export const Pagination = () => {
           <button
             key={i}
             onClick={() => setCurrentPage(i)}
-            className={`cursor-pointer w-10 h-10 rounded-lg font-bold text-sm transition-all duration-200 ${
+            className={`cursor-pointer w-[46px] h-[46px] rounded-[15px] text-[#182A42] text-[16px] font-bold text-sm transition-all duration-200 ${
               currentPage === i
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-110'
-                : 'text-gray-500 hover:bg-gray-100 border border-transparent'
+                ? ' font-bold  border-[1.5px] border-[#43A0FD]'
+                : ' border border-transparent'
             }`}
           >
             {i}
@@ -44,15 +45,13 @@ export const Pagination = () => {
   }, [currentPage, totalPages, setCurrentPage]); 
 
   return (
-    <div className="flex justify-center items-center gap-2 mt-16 py-8 border-t border-gray-100">
+    <div className="flex justify-center items-center gap-[12px] mt-16 py-8 border-t border-gray-100">
       <button
         onClick={() => setCurrentPage(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 text-gray-400 hover:text-blue-600 disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        className=" text-gray-400  disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-        </svg>
+        <CaretLeft />
       </button>
 
       <div className="flex items-center gap-1 ">
@@ -62,11 +61,9 @@ export const Pagination = () => {
       <button
         onClick={() => setCurrentPage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 text-gray-400 hover:text-blue-600 disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        className=" disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-        </svg>
+        <CaretRight />
       </button>
     </div>
   );
