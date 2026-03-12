@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Product } from '../types';
 import { useProducts } from '../hooks/useProducts';
 import { HighlightedText } from './HighlightedText';
+import { Checked, Drop, Basket } from './Icons';
 
 interface Props {
     product: Product;
@@ -16,13 +17,13 @@ export const ProductCard = ({ product }: Props) => {
     const isAvailable = hasVolumes ? currentVolumeData?.in_stock : product.in_stock;
 
     const { searchTerm } = useProducts();
-
+ console.log('ProductCard render', product);
     return (
-        <div className="group relative flex flex-col w-full max-w-[347px] p-4 bg-white border border-gray-200 rounded-lg hover:shadow-xl transition-shadow duration-300">
+        <div className="group relative flex flex-col w-full max-w-[347px] bg-white rounded-[16px]">
             <div className="relative flex items-center justify-center w-full mb-4 overflow-hidden rounded-md aspect-square bg-gray-50">
                 {!imgError ? (
                     <img
-                        src={`https://ip-194-99-21-145-139178.vps.hosted-by-mvps.net/storage/${product.image}`}
+                        src={`${product?.image}`}
                         alt={product.name}
                         className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-105"
                         onError={() => setImgError(true)}
@@ -37,72 +38,75 @@ export const ProductCard = ({ product }: Props) => {
             </div>
 
             <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-xl font-bold text-gray-900">
-                    {product.price} <span className="text-sm font-medium">{product.currency}</span>
-                </span>
 
                 {product.old_price > product.price && (
                     <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-400 line-through">
+                        <span className="text-[22px] text-[#8090A4] text-400 line-through decoration-[#FF2741]">
                             {product.old_price} {product.currency}
                         </span>
-                        {product.discount_percent > 0 && (
-                            <div className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                                -{product.discount_percent}%
-                            </div>
-                        )}
+
+                    </div>
+                )}
+                <span className="text-[22px] text-[#2288ED] text-transparent bg-clip-text bg-gradient-to-r from-[#003181] to-[#2288ED]">
+                    {product.price} <span className="">{product.currency}</span>
+                </span>
+                {product.discount_percent > 0 && (
+                    <div className="bg-red-500 text-white text-[14px] font-bold px-3 py-0.5 [clip-path:polygon(12px_0%,100%_0%,100%_100%,12px_100%,0%_50%)]">
+                        · {product.discount_percent}%
                     </div>
                 )}
             </div>
 
             <div className="flex flex-col flex-1">
-                <h3 className="mb-4 text-sm font-semibold leading-tight text-gray-900">
+                <h3 className="mb-4 text-[18px] font-400">
                     <HighlightedText text={product.name} highlight={searchTerm} />
                 </h3>
 
                 <div className="flex flex-col mt-auto">
-                    <div className="flex items-center mb-3">
-                        <div className="flex text-yellow-400">
+                    <div className="flex items-center mb-3 gap-[8px]">
+                        <div className="flex text-[#43A0FD] text-[12px]">
                             {[...Array(5)].map((_, i) => (
-                                <span key={i} className={i < Math.floor(product.rating) ? 'fill-current' : 'text-gray-300'}>
+                                <span key={i} className={i < Math.floor(product.rating) ? 'fill-current' : 'text-gray-300 '}>
                                     ★
                                 </span>
                             ))}
                         </div>
-                        <span className="text-[11px] text-gray-500 ml-2">({product.reviews_count})</span>
+                        <span className="text-[14px]  underline">{product.reviews_count}</span>
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-1">
                             {isAvailable ? (
                                 <>
-                                    <div className="flex items-center justify-center w-4 h-4 bg-green-100 rounded-full">
-                                        <svg className="w-2.5 h-2.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                                        </svg>
+                                    <div className="flex items-center gap-[14px] justify-center w-4 h-4 bg-green-100 rounded-full">
+                                        <Checked />
                                     </div>
-                                    <span className="text-[10px] font-bold text-green-600 uppercase tracking-tight">
+
+                                    <span className="text-[14px] font-400">
                                         В наявності
                                     </span>
+                                    <Drop />
+
                                 </>
                             ) : (
                                 <span className="text-[10px] font-bold text-red-400 uppercase tracking-tight">
                                     Немає в наявності
                                 </span>
                             )}
+                            <p className="text-[14px] font-medium text-[#8090A4]">
+                                {product.category}
+                            </p>
                         </div>
-                        <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">
-                            {product.category}
-                        </p>
+
                     </div>
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 w-full">
                         {hasVolumes && (
-                            <div className="relative flex-1">
+                            <div className="relative w-[90px] shrink-0">
                                 <select
                                     value={selectedVolume}
                                     onChange={(e) => setSelectedVolume(e.target.value)}
-                                    className="w-full h-10 pl-3 pr-8 text-xs font-medium text-black border border-gray-200 rounded-md appearance-none bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                                    className="w-full h-10 py-[1px] px-[20px] text-[11px] font-bold text-black border border-[#EBEBEB] rounded-[15px] appearance-none bg-white focus:outline-none focus:ring-1 focus:ring-blue-400 cursor-pointer"
                                 >
                                     {product.volumes.map((v) => (
                                         <option key={v.id} value={v.id}>
@@ -110,28 +114,25 @@ export const ProductCard = ({ product }: Props) => {
                                         </option>
                                     ))}
                                 </select>
-                                <div className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-400 pointer-events-none">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                {/* Іконка стрілочки */}
+                                <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-gray-400">
+                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
                             </div>
                         )}
 
                         <button
-                            onClick={() => alert(`Додано: ${product.name}\nОб'єм: ${selectedVolume || 'стандарт'}`)}
                             disabled={!isAvailable}
-                            className={`h-10 rounded-md transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-sm shrink-0
-                ${hasVolumes ? 'px-4' : 'w-full'} 
-                ${isAvailable
-                                    ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'
-                                    : 'bg-[#E8F4FF] text-blue-400 cursor-not-allowed'
+                            className={`h-10 flex-1 gap-[4px] rounded-[15px] transition-all active:scale-95 flex items-center justify-center text-[18px]
+            ${isAvailable
+                                    ? 'bg-[#E8F4FF] text-[#43A0FD] hover:bg-[#43A0FD] hover:text-white shadow-sm'
+                                    : 'bg-[#F5F5F5] text-gray-400 cursor-not-allowed'
                                 }`}
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            {!hasVolumes && <span>Додати в кошик</span>}
+                            <Basket />
+                            <span className='text-[#182A42]'>{hasVolumes ? 'В корзину' : 'Додати в кошик'}</span>
                         </button>
                     </div>
                 </div>

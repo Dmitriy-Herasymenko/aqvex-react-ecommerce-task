@@ -1,39 +1,38 @@
 import { useProducts } from './hooks/useProducts';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import { ProductCard } from './components/ProductCard';
 import { SortSelect } from './components/SortSelect';
 import { SearchInput } from './components/SearchInput';
 import { Pagination } from './components/Pagination';
 import { ProductSkeleton } from './components/ProductSkeleton';
 
-function App() {
-  const { products, loading, error, searchTerm, setSearchTerm } = useProducts();
 
-if (loading) return (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    {[...Array(12)].map((_, i) => <ProductSkeleton key={i} />)}
-  </div>
-);
+function App() {
+  const { products, loading, searchTerm, setSearchTerm } = useProducts();
+
+  if (loading) return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {[...Array(12)].map((_, i) => <ProductSkeleton key={i} />)}
+    </div>
+  );
   return (
     <div className="w-full min-h-screen bg-white">
-      
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1">
-        
-        <header className="w-full mb-6 text-left">
-          <h1 className="text-4xl font-black text-gray-900 tracking-tighter uppercase leading-none">
-            AQVEX <span className="text-blue-600">Store</span>
-          </h1>
-        </header>
 
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1">
+
+
+        <Header />
         <div className="w-full mb-12 flex">
           <div className="ml-auto w-full md:w-[450px]">
             <SearchInput />
           </div>
         </div>
 
-        <div className="w-full grid grid-cols-2 items-center mb-8 pb-4 border-b border-gray-100">
-          <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">
+        <div className="w-full grid grid-cols-2 items-center mb-8 pb-[20px]">
+          <div className="text-[16px] font-500">
             {products.length > 0 ? (
-              <span>Знайдено {products.length} товарів</span>
+              <span>{products.length} товаров</span>
             ) : (
               <span className="text-red-500">Нічого не знайдено</span>
             )}
@@ -68,7 +67,9 @@ if (loading) return (
           )}
         </div>
         <Pagination />
+        <Footer />
       </div>
+
     </div>
   );
 }

@@ -45,7 +45,7 @@ export const Pagination = () => {
   }, [currentPage, totalPages, setCurrentPage]); 
 
   return (
-    <div className="flex justify-center items-center gap-[12px] mt-16 py-8 border-t border-gray-100">
+    <div className="flex justify-center items-center gap-[12px] mt-16 py-8">
       <button
         onClick={() => setCurrentPage(currentPage - 1)}
         disabled={currentPage === 1}
