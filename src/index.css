@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
+
+
 @font-face {
   font-family: 'AqvexFont';
-  src: url('./assets/fonts/Klein/KleinCondensed-Light.otf') format('opentype');
+  src: url('./assets/fonts/Klein/Klein-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap; 
@@ -10,14 +12,14 @@
 
 @font-face {
   font-family: 'AqvexFont';
-  src: url('./assets/fonts/Klein/Klein-Regular.otf') format('opentype');
+  src: url('./assets/fonts/Klein/Klein-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap; 
 }
 
 @font-face {
-  font-family: 'AqvexCustom';
+  font-family: 'AqvexFont'; 
   src: url('./assets/fonts/Klein/Klein-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
@@ -25,25 +27,20 @@
 }
 
 :root {
-  font-family: 'AqvexCustom', sans-serif;
-  
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: 'AqvexFont', sans-serif;
+  font-weight: 500;
   
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
-  padding: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  display: block;
-  background-color: #ffffff;
   color: #182A42;
+  background-color: #ffffff;
 }
+
+
 
 
