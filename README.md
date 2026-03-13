@@ -3,7 +3,7 @@
 This project is a technical assessment for the **AQVEX** company. It features a fully functional product catalog page built with a focus on performance, scalability, and strict adherence to the provided Figma design.
 
 ## 🚀 Tech Stack
-* **React 18** with **Vite** — for a lightning-fast development environment.
+* **React 19.2.0** with **Vite** — for a lightning-fast development environment.
 * **TypeScript** — for robust data typing and improved developer experience.
 * **Tailwind CSS** — for pixel-perfect, responsive UI implementation.
 * **Custom Typography** — integrated Klein font family (ExtraLight to Bold).
